@@ -11,7 +11,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\taylo\OneDrive\Desktop\VS_CODE\Python\CS 2520\Projects\Key Notebook\assets\frame5")
+ASSETS_PATH = OUTPUT_PATH / "assets" / "frame5"
 
 
 def relative_to_assets(path: str) -> Path:
