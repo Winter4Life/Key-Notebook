@@ -55,6 +55,7 @@ def submit_butt(username, password):
     window.destroy()
     open_frame4()
     
+# Function to check if the account information already exists
 def validate_existence(username, password):
     with open("accounts.txt", "r") as file:
         lines = file.readlines()
