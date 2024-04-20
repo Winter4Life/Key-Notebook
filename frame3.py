@@ -17,6 +17,8 @@ ASSETS_PATH = OUTPUT_PATH / "assets" / "frame2"
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+
+# Frontend
 def open_frame3():
     window = Tk()
     window.geometry("978x640")

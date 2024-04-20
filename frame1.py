@@ -18,11 +18,14 @@ ASSETS_PATH = OUTPUT_PATH / "assets" / "frame4"
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+
+# Frontend
 def open_frame1():
     window = Tk()
     window.geometry("978x640")
     window.configure(bg = "#DAD4BF")
     
+    # Button functions
     def create_account_clicked():
         window.destroy()  # Close current window
         open_frame2()     # Open frame2
@@ -30,7 +33,6 @@ def open_frame1():
     def login_clicked():
         window.destroy()  # Close current window
         open_frame3()     # Open frame3
-
 
     canvas = Canvas(
         window,
@@ -136,6 +138,3 @@ def open_frame1():
     )
     window.resizable(False, False)
     window.mainloop()
-    
-    # Returning buttons to access in main
-    return frame1_createAcc_button, frame1_Login_button
