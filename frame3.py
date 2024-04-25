@@ -10,10 +10,8 @@ from pathlib import Path
 from tkinter import Tk, Canvas, Entry, messagebox, Button, PhotoImage
 from frame6 import open_frame6
 
-
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / "assets" / "frame2"
-
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
