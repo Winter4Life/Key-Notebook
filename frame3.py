@@ -8,7 +8,7 @@ from pathlib import Path
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, messagebox, Button, PhotoImage
-from frame4 import open_frame4
+from frame6 import open_frame6
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -35,7 +35,7 @@ def submit_butt(username, password):
         return
     
     window.destroy()
-    open_frame4()
+    open_frame6(username, password)
 
 # Frontend
 def open_frame3():
