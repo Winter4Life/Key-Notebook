@@ -4,16 +4,15 @@
 
 import re
 from pathlib import Path
+import random
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, messagebox, Button, PhotoImage
 from frame4 import open_frame4
 
-
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / "assets" / "frame3"
-
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -27,13 +26,17 @@ def validate_email(email):
 def validate_password(password):
     pattern = r"^(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>]).*$"
     return re.match(pattern, password)
+'''
+def get_auth_answer(auth):
+    return auth
+'''    
     
 # Function to write account information into file
-def store_info(username, password):
+def store_info(username, password, auth, question):
     with open("accounts.txt", "a") as file:
-        file.write(f"{username}\n{password}\n")
+        file.write(f"{username}\n{password}\n{auth}\n{question}\n")
         
-def submit_butt(username, password):
+def submit_butt(username, password, auth):
     if validate_existence(username, password):
         messagebox.showerror("Error", "Account already exists")
         return
@@ -51,7 +54,7 @@ def submit_butt(username, password):
         return
     
     # If all validations pass, store the account information
-    store_info(username, password)
+    store_info(username, password, auth, question)
     window.destroy()
     open_frame4()
     
@@ -69,6 +72,7 @@ def validate_existence(username, password):
 # Frontend
 def open_frame2():
     global window
+    global question
     window = Tk()
 
     window.geometry("978x640")
@@ -130,7 +134,7 @@ def open_frame2():
         file=relative_to_assets("entry_1.png"))
     entry_bg_1 = canvas.create_image(
         534.5,
-        400.5,
+        346.5,
         image=entry_image_1
     )
 
@@ -138,9 +142,18 @@ def open_frame2():
         file=relative_to_assets("entry_2.png"))
     entry_bg_2 = canvas.create_image(
         534.5,
-        275.0,
+        240.0,
         image=entry_image_2
     )
+
+    entry_image_3 = PhotoImage(
+        file=relative_to_assets("entry_3.png"))
+    entry_bg_2 = canvas.create_image(
+        534.5,
+        456.0,
+        image=entry_image_2
+    )
+
     frame2_username = Entry(
         bd=0,
         bg="#D9D9D9",
@@ -150,7 +163,7 @@ def open_frame2():
     )
     frame2_username.place(
         x=406.0,
-        y=242.0,
+        y=206.0,
         width=257.0,
         height=61.0
     )
@@ -164,13 +177,27 @@ def open_frame2():
     )
     frame2_password.place(
         x=406.0,
-        y=368.0,
+        y=314.0,
         width=257.0,
         height=61.0
     )
+    frame2_auth = Entry(
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0,
+        font=("Andada Pro", 12),
+    )
+    frame2_auth.place(
+        x=406.0,
+        y=422.0,
+        width=257.0,
+        height=61.0
+    )
+
     canvas.create_text(
         414.0,
-        130.0,
+        120.0,
         anchor="nw",
         text="Create Account",
         fill="#000000",
@@ -179,7 +206,7 @@ def open_frame2():
 
     canvas.create_text(
         410.0,
-        225.0,
+        190.0,
         anchor="nw",
         text="email or username",
         fill="#000000",
@@ -188,12 +215,39 @@ def open_frame2():
 
     canvas.create_text(
         410.0,
-        350.0,
+        295.0,
         anchor="nw",
         text="password",
         fill="#000000",
         font=("AndadaProRoman Regular", 13 * -1)
     )
+
+    questions = [
+        "The name of your first pet?",
+        "Where did you attend highschool?",
+        "What city were you born in?",
+        "Favorite author?",
+        "Favorite coding language?"
+    ]
+
+    # Function to select a random question
+    def select_random_question():
+        return random.choice(questions)
+
+    question = select_random_question()
+    # Create a text item in the canvas to display the question
+    text_item = canvas.create_text(
+        410.0,
+        405.0,
+        anchor="nw",
+        text=question,  # Initially display a random question
+        fill="#000000",
+        font=("AndadaProRoman Regular", 13 * -1)
+    )
+
+    # Function to update the text item with a new random question
+    def update_random_question():
+        canvas.itemconfig(text_item, text=select_random_question())
 
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
@@ -201,12 +255,12 @@ def open_frame2():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: submit_butt(frame2_username.get(), frame2_password.get()),
+        command=lambda: submit_butt(frame2_username.get(), frame2_password.get(), frame2_auth.get()),
         relief="flat"
     )
     frame2_submit_button.place(
         x=413.0,
-        y=473.0,
+        y=518.0,
         width=244.0,
         height=67.0
     )
