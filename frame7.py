@@ -15,178 +15,181 @@ ASSETS_PATH = OUTPUT_PATH / "assets" / "frame0"
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def open_frame7():
+    global window
+    window = Tk()
 
-window = Tk()
-
-window.geometry("978x640")
-window.configure(bg = "#DAD4BF")
+    window.geometry("978x640")
+    window.configure(bg = "#DAD4BF")
 
 
-canvas = Canvas(
-    window,
-    bg = "#DAD4BF",
-    height = 640,
-    width = 978,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
+    canvas = Canvas(
+        window,
+        bg = "#DAD4BF",
+        height = 640,
+        width = 978,
+        bd = 0,
+        highlightthickness = 0,
+        relief = "ridge"
+    )
 
-canvas.place(x = 0, y = 0)
-canvas.create_rectangle(
-    0.0,
-    0.0,
-    74.0,
-    640.0,
-    fill="#C3C3A9",
-    outline="")
+    canvas.place(x = 0, y = 0)
+    canvas.create_rectangle(
+        0.0,
+        0.0,
+        74.0,
+        640.0,
+        fill="#C3C3A9",
+        outline="")
 
-canvas.create_rectangle(
-    0.0,
-    0.0,
-    978.0,
-    67.0,
-    fill="#B5B59D",
-    outline="")
+    canvas.create_rectangle(
+        0.0,
+        0.0,
+        978.0,
+        67.0,
+        fill="#B5B59D",
+        outline="")
 
-image_image_1 = PhotoImage(
-    file=relative_to_assets("image_1.png"))
-image_1 = canvas.create_image(
-    37.0,
-    33.0,
-    image=image_image_1
-)
+    image_image_1 = PhotoImage(
+        file=relative_to_assets("image_1.png"))
+    image_1 = canvas.create_image(
+        37.0,
+        33.0,
+        image=image_image_1
+    )
 
-canvas.create_text(
-    74.0,
-    16.0,
-    anchor="nw",
-    text="Key Notebook",
-    fill="#000000",
-    font=("Amaranth Regular", 32 * -1)
-)
+    canvas.create_text(
+        74.0,
+        16.0,
+        anchor="nw",
+        text="Key Notebook",
+        fill="#000000",
+        font=("Amaranth Regular", 32 * -1)
+    )
 
-canvas.create_rectangle(
-    378.0,
-    207.0,
-    719.0,
-    615.0,
-    fill="#DAD4BF",
-    outline="")
+    canvas.create_rectangle(
+        378.0,
+        207.0,
+        719.0,
+        615.0,
+        fill="#DAD4BF",
+        outline="")
 
-entry_image_1 = PhotoImage(
-    file=relative_to_assets("entry_1.png"))
-entry_bg_1 = canvas.create_image(
-    534.5,
-    465.5,
-    image=entry_image_1
-)
-frame7_confirmPass = Entry(
-    bd=0,
-    bg="#D9D9D9",
-    fg="#000716",
-    highlightthickness=0,
-    font=("Andada Pro", 12),
-)
-frame7_confirmPass.place(
-    x=406.0,
-    y=432.0,
-    width=257.0,
-    height=61.0
-)
+    entry_image_1 = PhotoImage(
+        file=relative_to_assets("entry_1.png"))
+    entry_bg_1 = canvas.create_image(
+        534.5,
+        465.5,
+        image=entry_image_1
+    )
+    frame7_confirmPass = Entry(
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0,
+        font=("Andada Pro", 12),
+        show="*"
+    )
+    frame7_confirmPass.place(
+        x=406.0,
+        y=432.5,
+        width=257.0,
+        height=61.0
+    )
 
-entry_image_2 = PhotoImage(
-    file=relative_to_assets("entry_2.png"))
-entry_bg_2 = canvas.create_image(
-    534.5,
-    358.5,
-    image=entry_image_2
-)
-frame7_newPass = Entry(
-    bd=0,
-    bg="#D9D9D9",
-    fg="#000716",
-    highlightthickness=0,
-    font=("Andada Pro", 12),
-)
-frame7_newPass.place(
-    x=406.0,
-    y=323.0,
-    width=257.0,
-    height=61.0
-)
+    entry_image_2 = PhotoImage(
+        file=relative_to_assets("entry_2.png"))
+    entry_bg_2 = canvas.create_image(
+        534.5,
+        358.5,
+        image=entry_image_2
+    )
+    frame7_newPass = Entry(
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0,
+        font=("Andada Pro", 12),
+        show="*"
+    )
+    frame7_newPass.place(
+        x=406.0,
+        y=325.5,
+        width=257.0,
+        height=61.0
+    )
 
-entry_image_3 = PhotoImage(
-    file=relative_to_assets("entry_3.png"))
-entry_bg_3 = canvas.create_image(
-    534.5,
-    257.0,
-    image=entry_image_3
-)
-frame7_currPass = Entry(
-    bd=0,
-    bg="#D9D9D9",
-    fg="#000716",
-    highlightthickness=0,
-    font=("Andada Pro", 12),
-)
-frame7_currPass.place(
-    x=406.0,
-    y=223.5,
-    width=257.0,
-    height=61.0
-)
+    entry_image_3 = PhotoImage(
+        file=relative_to_assets("entry_3.png"))
+    entry_bg_3 = canvas.create_image(
+        534.5,
+        257.0,
+        image=entry_image_3
+    )
+    frame7_currPass = Entry(
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0,
+        font=("Andada Pro", 12),
+    )
+    frame7_currPass.place(
+        x=406.0,
+        y=223.5,
+        width=257.0,
+        height=61.0
+    )
 
-canvas.create_text(
-    395.0,
-    130.0,
-    anchor="nw",
-    text="Change Password",
-    fill="#000000",
-    font=("RobotoSerifNormalRoman Regular", 36 * -1)
-)
+    canvas.create_text(
+        395.0,
+        130.0,
+        anchor="nw",
+        text="Change Password",
+        fill="#000000",
+        font=("RobotoSerifNormalRoman Regular", 36 * -1)
+    )
 
-canvas.create_text(
-    410.0,
-    207.0,
-    anchor="nw",
-    text="enter current password",
-    fill="#000000",
-    font=("AndadaProRoman Regular", 13 * -1)
-)
+    canvas.create_text(
+        410.0,
+        207.0,
+        anchor="nw",
+        text="enter current password",
+        fill="#000000",
+        font=("AndadaProRoman Regular", 13 * -1)
+    )
 
-canvas.create_text(
-    410.0,
-    308.0,
-    anchor="nw",
-    text="new password",
-    fill="#000000",
-    font=("AndadaProRoman Regular", 13 * -1)
-)
+    canvas.create_text(
+        410.0,
+        308.0,
+        anchor="nw",
+        text="new password",
+        fill="#000000",
+        font=("AndadaProRoman Regular", 13 * -1)
+    )
 
-canvas.create_text(
-    410.0,
-    415.0,
-    anchor="nw",
-    text="confirm password",
-    fill="#000000",
-    font=("AndadaProRoman Regular", 13 * -1)
-)
+    canvas.create_text(
+        410.0,
+        415.0,
+        anchor="nw",
+        text="confirm password",
+        fill="#000000",
+        font=("AndadaProRoman Regular", 13 * -1)
+    )
 
-button_image_1 = PhotoImage(
-    file=relative_to_assets("button_1.png"))
-button_1 = Button(
-    image=button_image_1,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
-    relief="flat"
-)
-button_1.place(
-    x=413.0,
-    y=536.0,
-    width=244.0,
-    height=67.0
-)
-window.resizable(False, False)
-window.mainloop()
+    button_image_1 = PhotoImage(
+        file=relative_to_assets("button_1.png"))
+    button_1 = Button(
+        image=button_image_1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_1 clicked"),
+        relief="flat"
+    )
+    button_1.place(
+        x=413.0,
+        y=536.0,
+        width=244.0,
+        height=67.0
+    )
+    window.resizable(False, False)
+    window.mainloop()
