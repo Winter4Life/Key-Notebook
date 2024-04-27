@@ -11,6 +11,7 @@ import random
 from tkinter import Tk, Canvas, Entry, messagebox, Button, PhotoImage
 from frame4 import open_frame4
 
+
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / "assets" / "frame3"
 
@@ -25,16 +26,15 @@ def validate_email(email):
 # Function to validate entry box for password
 def validate_password(password):
     pattern = r"^(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>]).*$"
-    return re.match(pattern, password)
-'''
-def get_auth_answer(auth):
-    return auth
-'''    
+    return re.match(pattern, password) 
     
 # Function to write account information into file
 def store_info(username, password, auth, question):
     with open("accounts.txt", "a") as file:
         file.write(f"{username}\n{password}\n{auth}\n{question}\n")
+        
+    with open("current_user.txt", "a") as file:
+        file.write(f"{username}\n{password}\n")
         
 def submit_butt(username, password, auth):
     if validate_existence(username, password):

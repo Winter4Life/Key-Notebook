@@ -7,7 +7,7 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
+from tkinter import Tk, Canvas, Entry, Button, PhotoImage, messagebox
 from frame4 import open_frame4
 
 OUTPUT_PATH = Path(__file__).parent
@@ -25,10 +25,13 @@ def validate_answer(username, password, answer):
                 if account[2].strip() == answer:
                     window.destroy()
                     open_frame4()
+                    with open("current_user.txt", "a") as file:
+                        file.write(f"{username}\n{password}\n")
                     return
                 else:
                     messagebox.showerror("Error", "Incorrect answer")
                     return
+                
 
 def open_frame6(username, password):
     global window

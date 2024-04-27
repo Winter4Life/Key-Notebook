@@ -3,10 +3,11 @@
 # https://github.com/ParthJadhav/Tkinter-Designer
 
 from pathlib import Path
+import os
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Button, PhotoImage
 from frame7 import open_frame7
 
 OUTPUT_PATH = Path(__file__).parent
@@ -14,6 +15,15 @@ ASSETS_PATH = OUTPUT_PATH / "assets" / "frame5"
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
+
+def user_logout():
+    from frame1 import open_frame1
+    if os.path.exists("current_user.txt"):
+        os.remove("current_user.txt")
+        window.destroy()
+        open_frame1()
+    else:
+        print("File does not exist")
 
 def change_pass():
     window.destroy()
@@ -123,7 +133,7 @@ def open_frame5():
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_3 clicked"),
+        command=lambda: user_logout(),
         relief="flat"
     )
     logout_button.place(

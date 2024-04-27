@@ -7,7 +7,7 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Button, PhotoImage
 from frame2 import open_frame2
 from frame3 import open_frame3
 
@@ -17,7 +17,6 @@ ASSETS_PATH = OUTPUT_PATH / "assets" / "frame4"
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
-
 
 # Frontend
 def open_frame1():
