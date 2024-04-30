@@ -4,24 +4,103 @@
 
 
 from pathlib import Path
+import re
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Button, PhotoImage, messagebox
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / "assets" / "frame0"
 
+def validate_password(password):
+    pattern = r"^(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>]).*$"
+    return re.match(pattern, password)
+
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def read_current_user():
+    with open("current_user.txt", "r") as file:
+        lines = file.readlines()
+        if len(lines) >= 2:
+            return lines[0].strip(), lines[1].strip()
+        else:
+            return None, None
+
+def change_password(current_username, current_password, new_password):
+    # Read the accounts file
+    with open("accounts.txt", "r") as file:
+        accounts = file.readlines()
+
+    # Find the user
+    user_index = -1
+    for i, line in enumerate(accounts):
+        if line.strip() == current_username:
+            if accounts[i + 1].strip() == current_password:
+                user_index = i
+                break
+
+    if user_index == -1:
+        messagebox.showerror("Error", "Incorrect password")
+        return False
+
+    # Update the password in the accounts file
+    accounts[user_index + 1] = new_password + "\n"
+
+    # Save the changes back to the accounts file
+    with open("accounts.txt", "w") as file:
+        file.writelines(accounts)
+    with open("current_user.txt", "r") as file:
+        lines = file.readlines()
+
+    # Update the current user's password
+    lines[1] = new_password + "\n"
+
+    # Save the changes back to the current_user.txt file
+    with open("current_user.txt", "w") as file:
+        file.writelines(lines)
+
+    print("Password changed successfully.")
+    return True
+
 def open_frame7():
+
+    with open("current_user.txt", 'r') as file:
+        current_username = file.readline().strip()
+
+    def on_change_password():
+
+        # Retrieve values from entry fields
+        from frame4 import open_frame4
+        current_pass = frame7_currPass.get()
+        new_pass = frame7_newPass.get()
+        confirm_pass = frame7_confirmPass.get()
+
+        # Check if new password matches confirm password
+        if new_pass != confirm_pass:
+            messagebox.showerror("Error", "Passwords do not match")
+            return
+        if not validate_password(new_pass):
+            messagebox.showinfo("Error", "Password must contain at least 1 number and special character")
+            return
+
+        # Change the password
+        if change_password(current_username, current_pass, new_pass):
+            # Clear entry fields after successful password change
+            frame7_currPass.delete(0, 'end')
+            frame7_newPass.delete(0, 'end')
+            frame7_confirmPass.delete(0, 'end')
+            messagebox.showinfo("Success", "Password changed successfully.")
+
+            window.destroy()
+            open_frame4()
+
     global window
     window = Tk()
 
     window.geometry("978x640")
     window.configure(bg = "#DAD4BF")
-
 
     canvas = Canvas(
         window,
@@ -32,7 +111,6 @@ def open_frame7():
         highlightthickness = 0,
         relief = "ridge"
     )
-
     canvas.place(x = 0, y = 0)
     canvas.create_rectangle(
         0.0,
@@ -182,7 +260,7 @@ def open_frame7():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=on_change_password,
         relief="flat"
     )
     button_1.place(
