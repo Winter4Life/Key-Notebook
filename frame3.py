@@ -181,5 +181,20 @@ def open_frame3():
         width=244.0,
         height=67.0
     )
+    button_image_2 = PhotoImage(
+    file=relative_to_assets("button_2.png"))
+    frame3_back_button = Button(
+        image=button_image_2,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_2 clicked"),
+        relief="flat"
+    )
+    frame3_back_button.place(
+        x=16.0,
+        y=584.0,
+        width=42.0,
+        height=42.0
+    )
     window.resizable(False, False)
     window.mainloop()
