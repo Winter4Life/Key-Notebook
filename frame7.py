@@ -64,13 +64,17 @@ def change_password(current_username, current_password, new_password):
     print("Password changed successfully.")
     return True
 
+def back() :
+        from frame5 import open_frame5
+        window.destroy()
+        open_frame5()
+
 def open_frame7():
 
     with open("current_user.txt", 'r') as file:
         current_username = file.readline().strip()
 
     def on_change_password():
-
         # Retrieve values from entry fields
         from frame4 import open_frame4
         current_pass = frame7_currPass.get()
@@ -275,7 +279,7 @@ def open_frame7():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: back(),
         relief="flat"
     )
     frame7_back_button.place(

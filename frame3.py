@@ -35,6 +35,11 @@ def submit_butt(username, password):
     window.destroy()
     open_frame6(username, password)
 
+def back() :
+    from frame1 import open_frame1
+    window.destroy()
+    open_frame1()
+
 # Frontend
 def open_frame3():
     global window
@@ -187,7 +192,7 @@ def open_frame3():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: back(),
         relief="flat"
     )
     frame3_back_button.place(

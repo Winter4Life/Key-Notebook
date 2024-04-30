@@ -69,6 +69,11 @@ def validate_existence(username, password):
                 return True
     return False
 
+def back() :
+    from frame1 import open_frame1
+    window.destroy()
+    open_frame1()
+
 # Frontend
 def open_frame2():
     global window
@@ -270,7 +275,7 @@ def open_frame2():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: back(),
         relief="flat"
     )
     frame2_back_button.place(

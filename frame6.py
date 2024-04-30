@@ -32,6 +32,11 @@ def validate_answer(username, password, answer):
                     messagebox.showerror("Error", "Incorrect answer")
                     return
                 
+def back() :
+    from frame3 import open_frame3
+    window.destroy()
+    open_frame3()
+                
 
 def open_frame6(username, password):
     global window
@@ -161,7 +166,7 @@ def open_frame6(username, password):
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: back(),
         relief="flat"
     )
     frame6_back_button.place(
