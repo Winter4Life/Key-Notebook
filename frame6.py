@@ -23,10 +23,10 @@ def validate_answer(username, password, answer):
         for account in accounts:
             if account[0].strip() == username and account[1].strip() == password:
                 if account[2].strip() == answer:
-                    window.destroy()
-                    open_frame4()
                     with open("current_user.txt", "a") as file:
                         file.write(f"{username}\n{password}\n")
+                    window.destroy()
+                    open_frame4()
                     return
                 else:
                     messagebox.showerror("Error", "Incorrect answer")
