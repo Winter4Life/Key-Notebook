@@ -16,19 +16,22 @@ ASSETS_PATH = OUTPUT_PATH / "assets" / "frame1"
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def open_settings():
-    window.destroy()
-    open_frame5()
-
 def save_entries(entries, filename):
-    filepath = f"{"user_information"}/{filename}"
+    filepath = f"user_information/{filename}"
     with open(filepath, 'w') as file:
         for entry in entries:
             file.write(entry.get() + '\n')
 
+def open_settings(entries, filename):
+    save_entries(entries, filename)
+    window.destroy()
+    open_frame5()
+
+
+
 # Function to read entry contents from a text file
 def load_entries(entries, filename):
-    filepath = f"{"user_information"}/{filename}"
+    filepath = f"user_information/{filename}"
     with open(filepath, 'r') as file:
         lines = file.readlines()
         for i, line in enumerate(lines):
@@ -46,8 +49,8 @@ def open_frame4():
 
     window.geometry("978x640")
     window.configure(bg = "#DAD4BF")
-
-
+    entries = []
+    name = getUser()
     canvas = Canvas(
         window,
         bg = "#DAD4BF",
@@ -98,7 +101,7 @@ def open_frame4():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: open_settings(),
+        command=lambda: open_settings(entries, name+".txt"),
         relief="flat"
     )
     settings_button.place(
@@ -215,7 +218,6 @@ def open_frame4():
 
     startx = 277.0
     starty = 110.0
-    entries = []
     for i in range(21):
         if i % 4 == 0:
             starty += 17
@@ -581,7 +583,6 @@ def open_frame4():
         570.038818359375,
         fill="#000000",
         outline="")
-    name = getUser()
 
     def on_closing():
         save_entries(entries, name + ".txt")
