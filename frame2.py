@@ -79,9 +79,15 @@ def open_frame2():
     global window
     global question
     window = Tk()
-
     window.geometry("978x640")
     window.configure(bg = "#DAD4BF")
+    
+    # Center window
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - 978) // 2
+    y = (screen_height - 640) // 2
+    window.geometry(f"+{x}+{y}")
 
     canvas = Canvas(
         window,

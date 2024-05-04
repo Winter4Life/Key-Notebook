@@ -34,6 +34,17 @@ def change_password(username, new_password):
         file.writelines(lines)
 
 def open_frame10(username):
+    global window
+    window = Tk()
+    window.geometry("978x640")
+    window.configure(bg = "#DAD4BF")
+    
+    # Center window
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - 978) // 2
+    y = (screen_height - 640) // 2
+    window.geometry(f"+{x}+{y}")
     
     def back():
         from frame9 import open_frame9
@@ -55,12 +66,6 @@ def open_frame10(username):
         window.destroy()
         open_frame1()
     
-    global window
-    window = Tk()
-
-    window.geometry("978x640")
-    window.configure(bg = "#DAD4BF")
-
     canvas = Canvas(
         window,
         bg = "#DAD4BF",

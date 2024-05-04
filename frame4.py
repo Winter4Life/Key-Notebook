@@ -27,8 +27,6 @@ def open_settings(entries, filename):
     window.destroy()
     open_frame5()
 
-
-
 # Function to read entry contents from a text file
 def load_entries(entries, filename):
     filepath = f"user_information/{filename}"
@@ -46,9 +44,16 @@ def getUser():
 def open_frame4():
     global window
     window = Tk()
-
     window.geometry("978x640")
     window.configure(bg = "#DAD4BF")
+    
+    # Center window
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - 978) // 2
+    y = (screen_height - 640) // 2
+    window.geometry(f"+{x}+{y}")
+    
     entries = []
     name = getUser()
     canvas = Canvas(

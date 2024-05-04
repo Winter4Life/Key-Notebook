@@ -34,18 +34,22 @@ def validate_answer(username, answer):
     messagebox.showerror("Error", "User not found")
 
 def open_frame9(username):
+    global window
+    window = Tk()
+    window.geometry("978x640")
+    window.configure(bg = "#DAD4BF")
+    
+    # Center window
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width - 978) // 2
+    y = (screen_height - 640) // 2
+    window.geometry(f"+{x}+{y}")
     
     def back():
         from frame8 import open_frame8
         window.destroy()
         open_frame8()
-        
-    global window
-    window = Tk()
-
-    window.geometry("978x640")
-    window.configure(bg = "#DAD4BF")
-
 
     canvas = Canvas(
         window,
