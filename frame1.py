@@ -10,6 +10,7 @@ from pathlib import Path
 from tkinter import Tk, Canvas, Button, PhotoImage
 from frame2 import open_frame2
 from frame3 import open_frame3
+from frame8 import open_frame8
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / "assets" / "frame1"
@@ -26,13 +27,17 @@ def open_frame1():
     
     # Button functions
     def create_account_clicked():
-        window.destroy()  # Close current window
-        open_frame2()     # Open frame2
+        window.destroy()  
+        open_frame2()    
 
     def login_clicked():
-        window.destroy()  # Close current window
-        open_frame3()     # Open frame3
-
+        window.destroy() 
+        open_frame3()    
+        
+    def forgot_pass():
+        window.destroy()
+        open_frame8()
+        
     canvas = Canvas(
         window,
         bg = "#DAD4BF",
@@ -112,14 +117,14 @@ def open_frame1():
 
     button_image_3 = PhotoImage(
         file=relative_to_assets("button_3.png"))
-    button_3 = Button(
+    forgot_pass_button = Button(
         image=button_image_3,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_3 clicked"),
+        command=lambda: forgot_pass(),
         relief="flat"
     )
-    button_3.place(
+    forgot_pass_button.place(
         x=456.0,
         y=515.0,
         width=128.0,

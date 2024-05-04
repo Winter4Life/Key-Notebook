@@ -7,7 +7,8 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, messagebox, Button, PhotoImage
+from frame9 import open_frame9
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -17,7 +18,23 @@ ASSETS_PATH = OUTPUT_PATH / "assets" / "frame8"
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def username_exists(username):
+    with open('accounts.txt', 'r') as file:
+        lines = file.readlines()
+        usernames = [lines[i].strip() for i in range(0, len(lines), 4)]
+        if username in usernames:
+            window.destroy()
+            open_frame9(username)
+        else:
+            messagebox.showerror("Error", "User does not exist.")
+
 def open_frame8():
+        
+    def back():
+        from frame1 import open_frame1
+        window.destroy()
+        open_frame1()
+    
     global window
     window = Tk()
 
@@ -83,14 +100,14 @@ def open_frame8():
         343.5,
         image=entry_image_1
     )
-    entry_1 = Entry(
+    frame8_username = Entry(
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0,
         font=("Andada Pro", 12),
     )
-    entry_1.place(
+    frame8_username.place(
         x=405.0,
         y=311.0,
         width=257.0,
@@ -121,7 +138,7 @@ def open_frame8():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=lambda:username_exists(frame8_username.get()),
         relief="flat"
     )
     submit_button.place(
@@ -137,7 +154,7 @@ def open_frame8():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: back(),
         relief="flat"
     )
     back_button.place(

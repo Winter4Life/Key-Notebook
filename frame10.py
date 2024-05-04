@@ -7,7 +7,7 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, messagebox, Button, PhotoImage
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -17,14 +17,49 @@ ASSETS_PATH = OUTPUT_PATH / "assets" / "frame10"
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def open_frame10():
+def change_password(username, new_password):
+    with open("accounts.txt", "r") as file:
+        lines = file.readlines()
+
+    # Find the user
+    for i, line in enumerate(lines):
+        if line.strip() == username:
+            password_index = i + 1
+            break
+
+    lines[password_index] = new_password + "\n"
+
+    # Write back the modified content to the file
+    with open("accounts.txt", "w") as file:
+        file.writelines(lines)
+
+def open_frame10(username):
+    
+    def back():
+        from frame9 import open_frame9
+        window.destroy()
+        open_frame9()
+    
+    def submit():
+        from frame1 import open_frame1
+        new_password = frame10_newPass.get().strip()
+        confirm_password = frame10_newPass2.get().strip()
+        
+        if new_password != confirm_password:
+            messagebox.showerror("Error", "Passwords do not match")
+            return
+        
+        # Function to change the password
+        change_password(username, new_password)
+        messagebox.showinfo("Success", "Password changed successfully")
+        window.destroy()
+        open_frame1()
     
     global window
     window = Tk()
 
     window.geometry("978x640")
     window.configure(bg = "#DAD4BF")
-
 
     canvas = Canvas(
         window,
@@ -85,14 +120,14 @@ def open_frame10():
         407.5,
         image=entry_image_1
     )
-    entry_1 = Entry(
+    frame10_newPass = Entry(
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0,
         font=("Andada Pro", 12)
     )
-    entry_1.place(
+    frame10_newPass.place(
         x=406.0,
         y=375.0,
         width=257.0,
@@ -106,14 +141,14 @@ def open_frame10():
         298.5,
         image=entry_image_2
     )
-    entry_2 = Entry(
+    frame10_newPass2 = Entry(
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0,
         font=("Andada Pro", 12)
     )
-    entry_2.place(
+    frame10_newPass2.place(
         x=406.0,
         y=266.0,
         width=257.0,
@@ -153,7 +188,7 @@ def open_frame10():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=lambda: submit(),
         relief="flat"
     )
     submit_button.place(
@@ -169,7 +204,7 @@ def open_frame10():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: back(),
         relief="flat"
     )
     back_button.place(
