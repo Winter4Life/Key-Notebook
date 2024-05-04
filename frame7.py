@@ -11,7 +11,7 @@ import re
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage, messagebox
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / "assets" / "frame0"
+ASSETS_PATH = OUTPUT_PATH / "assets" / "frame7"
 
 def validate_password(password):
     pattern = r"^(?=.*[0-9])(?=.*[!@#$%^&*(),.?\":{}|<>]).*$"

@@ -13,7 +13,7 @@ from frame4 import open_frame4
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / "assets" / "frame3"
+ASSETS_PATH = OUTPUT_PATH / "assets" / "frame2"
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -191,7 +191,7 @@ def open_frame2():
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0,
-        font=("Andada Pro", 12),
+        font=("Andada Pro", 12)
     )
     frame2_auth.place(
         x=406.0,

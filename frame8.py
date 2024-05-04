@@ -7,31 +7,22 @@ from pathlib import Path
 
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Button, PhotoImage
-from frame2 import open_frame2
-from frame3 import open_frame3
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / "assets" / "frame1"
+ASSETS_PATH = OUTPUT_PATH / "assets" / "frame8"
 
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-# Frontend
-def open_frame1():
+def open_frame8():
+    global window
     window = Tk()
+
     window.geometry("978x640")
     window.configure(bg = "#DAD4BF")
-    
-    # Button functions
-    def create_account_clicked():
-        window.destroy()  # Close current window
-        open_frame2()     # Open frame2
-
-    def login_clicked():
-        window.destroy()  # Close current window
-        open_frame3()     # Open frame3
 
     canvas = Canvas(
         window,
@@ -77,63 +68,83 @@ def open_frame1():
         font=("Amaranth Regular", 32 * -1)
     )
 
+    canvas.create_rectangle(
+        378.0,
+        207.0,
+        719.0,
+        615.0,
+        fill="#DAD4BF",
+        outline="")
+
+    entry_image_1 = PhotoImage(
+        file=relative_to_assets("entry_1.png"))
+    entry_bg_1 = canvas.create_image(
+        533.5,
+        343.5,
+        image=entry_image_1
+    )
+    entry_1 = Entry(
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0,
+        font=("Andada Pro", 12),
+    )
+    entry_1.place(
+        x=405.0,
+        y=311.0,
+        width=257.0,
+        height=61.0
+    )
+
+    canvas.create_text(
+        400.0,
+        130.0,
+        anchor="nw",
+        text="Forgot Password",
+        fill="#000000",
+        font=("RobotoSerifNormalRoman Regular", 36 * -1)
+    )
+
+    canvas.create_text(
+        409.0,
+        293.0,
+        anchor="nw",
+        text="enter username/email",
+        fill="#000000",
+        font=("AndadaProRoman Regular", 13 * -1)
+    )
+
     button_image_1 = PhotoImage(
         file=relative_to_assets("button_1.png"))
-    frame1_createAcc_button = Button(
+    submit_button = Button(
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=create_account_clicked,
-        relief="flat",
-        
+        command=lambda: print("button_1 clicked"),
+        relief="flat"
     )
-    frame1_createAcc_button.place(
-        x=210.0,
-        y=409.0,
-        width=271.0,
-        height=86.0
+    submit_button.place(
+        x=413.0,
+        y=482.0,
+        width=244.0,
+        height=67.0
     )
 
     button_image_2 = PhotoImage(
         file=relative_to_assets("button_2.png"))
-    frame1_Login_button = Button(
+    back_button = Button(
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=login_clicked,
+        command=lambda: print("button_2 clicked"),
         relief="flat"
     )
-    frame1_Login_button.place(
-        x=560.0,
-        y=409.0,
-        width=270.0,
-        height=80.0
-    )
-
-    button_image_3 = PhotoImage(
-        file=relative_to_assets("button_3.png"))
-    button_3 = Button(
-        image=button_image_3,
-        borderwidth=0,
-        highlightthickness=0,
-        command=lambda: print("button_3 clicked"),
-        relief="flat"
-    )
-    button_3.place(
-        x=456.0,
-        y=515.0,
-        width=128.0,
-        height=29.0
-    )
-
-    canvas.create_text(
-        395.0,
-        203.0,
-        anchor="nw",
-        text="Create Account\nor\nLogin",
-        fill="#000000",
-        font=("RobotoSerifNormalRoman Regular", 36 * -1),
-        justify="center"
+    back_button.place(
+        x=16.0,
+        y=582.0,
+        width=42.0,
+        height=42.0
     )
     window.resizable(False, False)
     window.mainloop()
