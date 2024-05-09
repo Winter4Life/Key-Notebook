@@ -62,6 +62,58 @@ def getUser():
         user = file.readline()
         return user.strip()
 
+key = 0
+entry_Dictionary = {}
+
+def next_page(entries):
+    global key
+    global entry_Dictionary
+    entryList = []
+    count = count_entries(entries)
+    if count == 40 and key == len(entry_Dictionary) - 1:
+        for entry in entries:
+            text = entry.get()
+            entryList.append(text)
+            entry.delete(0, 'end')
+        entry_Dictionary[key] = entryList
+        key += 1  # Move to the next page
+    elif key < len(entry_Dictionary) - 1:
+        if key < len(entry_Dictionary) - 1:
+            key += 1
+            next_entries = entry_Dictionary[key]
+            for entry_widget, text in zip(entries, next_entries):
+                entry_widget.delete(0, 'end')
+                entry_widget.insert(0, text)
+
+def previous_page(entries):
+    global entry_Dictionary
+    global key
+
+    entryList = [entry.get() for entry in entries]
+    entry_Dictionary[key] = entryList
+
+    if key > 0:
+        key -= 1
+        previous_entries = entry_Dictionary[key] 
+        for entry_widget, text in zip(entries, previous_entries):
+            entry_widget.delete(0, 'end') 
+            entry_widget.insert(0, text)
+
+def show_journal():
+    global entry_Dictionary
+    for key, entries in entry_Dictionary.items():
+        print(f"Page {key}:")
+        for entry in entries:
+            print(entry)
+
+def count_entries(entries):
+    count = 0
+    for entry in entries:
+        text = entry.get()
+        if len(text) > 0:
+            count += 1
+    return count
+
 # Frontend
 def open_frame4():
     global window
